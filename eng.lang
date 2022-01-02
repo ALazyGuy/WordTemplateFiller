@@ -1,1 +1,4 @@
 menu.exit: Exit
+menu.builder: Builder
+menu.filler: Filler
+menu.welcome: MS Word Template Engine

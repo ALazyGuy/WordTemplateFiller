@@ -1,1 +1,4 @@
 menu.exit: Выход
+menu.builder: Построитель
+menu.filler: Заполнитель
+menu.welcome: Обработчик шаблонов MS Word
