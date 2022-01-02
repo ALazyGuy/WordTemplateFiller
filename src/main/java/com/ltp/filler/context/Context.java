@@ -1,5 +1,6 @@
 package com.ltp.filler.context;
 
+import com.ltp.filler.context.controller.LangController;
 import com.ltp.filler.context.view.MenuView;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -27,6 +28,7 @@ public class Context {
     public static void init(String CFG){
         CONFIG = CFG;
         loadProperties();
+        LangController.init();
         initWindow();
     }
 

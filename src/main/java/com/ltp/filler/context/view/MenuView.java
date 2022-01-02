@@ -1,6 +1,7 @@
 package com.ltp.filler.context.view;
 
 import com.ltp.filler.context.Context;
+import com.ltp.filler.context.controller.LangController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,7 +9,7 @@ import java.awt.event.ActionEvent;
 
 public class MenuView extends JPanel {
 
-    private final JButton exit = new JButton("Exit");
+    private final JButton exit = new JButton(LangController.get("menu.exit"));
 
     public MenuView(){
         setMaximumSize(new Dimension(800, 600));
