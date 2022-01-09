@@ -2,15 +2,21 @@ package com.ltp.filler.context.view;
 
 import com.ltp.filler.context.Context;
 import com.ltp.filler.context.controller.LangController;
+import com.ltp.filler.util.WordUtils;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
+import java.io.File;
 
 public class MenuView extends JPanel {
 
     private final JButton exit = new JButton(LangController.get("menu.exit"));
     private final JButton builder = new JButton(LangController.get("menu.builder"));
     private final JButton filler = new JButton(LangController.get("menu.filler"));
+
+    private JFileChooser fileChooser;
 
     public MenuView(){
         setMaximumSize(new Dimension(700, 350));
@@ -34,6 +40,17 @@ public class MenuView extends JPanel {
 
     private void initListeners(){
         exit.addActionListener(e -> Context.exit());
+
+        builder.addActionListener(e -> {
+            fileChooser = new JFileChooser();
+            fileChooser.setFileFilter(new FileNameExtensionFilter("Word", "docx", "doc"));
+            fileChooser.setDialogTitle("Choose file to create a template");
+            fileChooser.setDialogType(JFileChooser.FILES_ONLY);
+            if(fileChooser.showDialog(this, "Select") == JFileChooser.APPROVE_OPTION){
+                File file = fileChooser.getSelectedFile();
+                JOptionPane.showMessageDialog(null, WordUtils.getText(file));
+            }
+        });
     }
 
 }
