@@ -2,6 +2,7 @@ package com.ltp.filler.context;
 
 import com.ltp.filler.context.controller.LangController;
 import com.ltp.filler.context.view.MenuView;
+import com.ltp.filler.context.view.RenderPanel;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.SneakyThrows;
@@ -24,6 +25,7 @@ public class Context {
     private static String CONFIG;
     private static Map<String, String> properties = new HashMap<>();
     private static JFrame window;
+    private static RenderPanel renderPanel;
 
     public static void init(String CFG){
         CONFIG = CFG;
@@ -41,6 +43,10 @@ public class Context {
         window.dispose();
     }
 
+    public static RenderPanel getRenderPanel(){
+        return renderPanel;
+    }
+
     @SneakyThrows
     private static void saveEnv(){
         String env = properties
@@ -51,10 +57,18 @@ public class Context {
         Files.write(Paths.get(CONFIG), env.getBytes(StandardCharsets.UTF_8));
     }
 
+    public static JDialog newDialog(String title, JPanel panel, boolean modal){
+        JDialog dialog = new JDialog(window, title, modal);
+        dialog.add(panel);
+        dialog.setLocationRelativeTo(null);
+        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        return dialog;
+    }
+
     private static void initWindow(){
+        renderPanel = new RenderPanel();
         window = new JFrame(properties.get("frame.name"));
-        //Add components here;
-        window.add(new MenuView());
+        window.add(renderPanel);
         window.pack();
         window.setResizable(false);
         window.setLocationRelativeTo(null);
@@ -68,6 +82,7 @@ public class Context {
             }
         });
     }
+
 
     @SneakyThrows
     private static void loadProperties(){

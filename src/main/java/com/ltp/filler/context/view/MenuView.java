@@ -48,8 +48,15 @@ public class MenuView extends JPanel {
             fileChooser.setDialogType(JFileChooser.FILES_ONLY);
             if(fileChooser.showDialog(this, "Select") == JFileChooser.APPROVE_OPTION){
                 File file = fileChooser.getSelectedFile();
-                JOptionPane.showMessageDialog(null, WordUtils.getText(file));
+                BuilderView.setText(WordUtils.getText(file));
             }
+            Context.getRenderPanel().show(BuilderView.class);
+        });
+
+        filler.addActionListener(e -> {
+            JDialog test = Context.newDialog("Test", new JPanel(), true);
+            test.setSize(100, 100);
+            test.setVisible(true);
         });
     }
 
