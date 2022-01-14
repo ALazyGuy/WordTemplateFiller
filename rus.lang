@@ -9,6 +9,8 @@ settings.accept: Принять
 settings.cancel: Отмена
 settings.restart: Изменения вступят в силу после перезагрузки. Хотите перезагрузить сейчас?
 menuBar.file: Файл
+menuBar.file.createTemplate: Создать шаблон
+menuBar.file.editTemplate: Изменить шаблон
 menuBar.file.settings: Настройки
 menuBar.file.exit: Выход
 builder.tplTitle: Создание шаблона

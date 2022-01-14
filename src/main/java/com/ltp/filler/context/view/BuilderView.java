@@ -8,6 +8,8 @@ import com.ltp.filler.util.WordUtils;
 import lombok.Setter;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Comparator;
@@ -19,6 +21,7 @@ public class BuilderView extends JScrollPane {
 
     private static final JTextArea text = new JTextArea();
     private static List<Template> templates = new LinkedList<>();
+    private static String savedText;
     @Setter
     private static String filePath;
 
@@ -26,6 +29,8 @@ public class BuilderView extends JScrollPane {
         super(text);
 
         setFocusable(true);
+
+        text.setEditable(false);
 
         text.addKeyListener(new KeyAdapter() {
             @Override
@@ -71,6 +76,7 @@ public class BuilderView extends JScrollPane {
 
     public static void setText(String txt){
         text.setText(txt);
+        savedText = txt;
     }
 
     public static void appendTemplate(Template template){

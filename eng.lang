@@ -9,6 +9,8 @@ settings.accept: Accept
 settings.cancel: Cancel
 settings.restart: Changes will be applied after restart. Do you wanna restart now?
 menuBar.file: File
+menuBar.file.createTemplate: Create template
+menuBar.file.editTemplate: Edit template
 menuBar.file.settings: Settings
 menuBar.file.exit: Exit
 builder.tplTitle: Template builder

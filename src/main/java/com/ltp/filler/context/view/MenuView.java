@@ -2,7 +2,9 @@ package com.ltp.filler.context.view;
 
 import com.ltp.filler.context.Context;
 import com.ltp.filler.context.controller.LangController;
+import com.ltp.filler.context.model.TemplateDocument;
 import com.ltp.filler.context.view.dialog.SettingsPanel;
+import com.ltp.filler.exception.TemplateException;
 import com.ltp.filler.util.WordUtils;
 
 import javax.swing.*;
@@ -17,7 +19,7 @@ public class MenuView extends JPanel {
     private final JButton builder = new JButton(LangController.get("menu.builder"));
     private final JButton filler = new JButton(LangController.get("menu.filler"));
 
-    private JFileChooser fileChooser;
+    private static JFileChooser fileChooser;
 
     public MenuView(){
         setMaximumSize(new Dimension(700, 350));
@@ -26,6 +28,39 @@ public class MenuView extends JPanel {
 
         initLayout();
         initListeners();
+    }
+
+    public static void toBuilderEdit(){
+        fileChooser = new JFileChooser();
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Word template", "wtpl"));
+        fileChooser.setDialogTitle("Choose template to edit");
+        fileChooser.setDialogType(JFileChooser.FILES_ONLY);
+        if(fileChooser.showDialog(null, "Select") == JFileChooser.APPROVE_OPTION){
+            File file = fileChooser.getSelectedFile();
+            try {
+                TemplateDocument templateDocument = new TemplateDocument(file);
+                BuilderView.setText(WordUtils.getText(templateDocument.getWordFile()));
+                BuilderView.setFilePath(templateDocument.getWordFile().getPath());
+                templateDocument.getTemplates()
+                                .forEach(BuilderView::appendTemplate);
+                Context.getRenderPanel().show(BuilderView.class);
+            } catch (TemplateException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static void toBuilder(){
+        fileChooser = new JFileChooser();
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Word", "docx", "doc"));
+        fileChooser.setDialogTitle("Choose file to create a template");
+        fileChooser.setDialogType(JFileChooser.FILES_ONLY);
+        if(fileChooser.showDialog(null, "Select") == JFileChooser.APPROVE_OPTION){
+            File file = fileChooser.getSelectedFile();
+            BuilderView.setText(WordUtils.getText(file));
+            BuilderView.setFilePath(file.getPath());
+            Context.getRenderPanel().show(BuilderView.class);
+        }
     }
 
     private void initLayout(){
@@ -43,16 +78,7 @@ public class MenuView extends JPanel {
         exit.addActionListener(e -> Context.exit());
 
         builder.addActionListener(e -> {
-            fileChooser = new JFileChooser();
-            fileChooser.setFileFilter(new FileNameExtensionFilter("Word", "docx", "doc"));
-            fileChooser.setDialogTitle("Choose file to create a template");
-            fileChooser.setDialogType(JFileChooser.FILES_ONLY);
-            if(fileChooser.showDialog(this, "Select") == JFileChooser.APPROVE_OPTION){
-                File file = fileChooser.getSelectedFile();
-                BuilderView.setText(WordUtils.getText(file));
-                BuilderView.setFilePath(file.getPath());
-            }
-            Context.getRenderPanel().show(BuilderView.class);
+            toBuilder();
         });
     }
 

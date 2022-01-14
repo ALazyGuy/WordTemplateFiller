@@ -122,12 +122,19 @@ public class Context {
         JMenuBar menuBar = new JMenuBar();
         JMenu file = new JMenu(LangController.get("menuBar.file"));
         JMenuItem settings = new JMenuItem(LangController.get("menuBar.file.settings"));
+        JMenuItem createTemplate = new JMenuItem(LangController.get("menuBar.file.createTemplate"));
+        JMenuItem editTemplate = new JMenuItem(LangController.get("menuBar.file.editTemplate"));
         JMenuItem exit = new JMenuItem(LangController.get("menuBar.file.exit"));
 
+        file.add(createTemplate);
+        file.add(editTemplate);
         file.add(settings);
         file.add(exit);
 
         menuBar.add(file);
+
+        createTemplate.addActionListener(e -> MenuView.toBuilder());
+        editTemplate.addActionListener(e -> MenuView.toBuilderEdit());
 
         settings.addActionListener(e -> {
             JDialog settingsDialog = newDialog("Settings", new SettingsPanel(), true);
