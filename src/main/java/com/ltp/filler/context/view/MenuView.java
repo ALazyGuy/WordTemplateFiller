@@ -2,16 +2,17 @@ package com.ltp.filler.context.view;
 
 import com.ltp.filler.context.Context;
 import com.ltp.filler.context.controller.LangController;
+import com.ltp.filler.context.model.Template;
 import com.ltp.filler.context.model.TemplateDocument;
-import com.ltp.filler.context.view.dialog.SettingsPanel;
 import com.ltp.filler.exception.TemplateException;
 import com.ltp.filler.util.WordUtils;
 
 import javax.swing.*;
-import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.io.File;
+import java.util.LinkedList;
+import java.util.List;
 
 public class MenuView extends JPanel {
 
@@ -28,6 +29,25 @@ public class MenuView extends JPanel {
 
         initLayout();
         initListeners();
+    }
+
+    public static void toFiller(){
+        fileChooser = new JFileChooser();
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Word template", "wtpl"));
+        fileChooser.setDialogTitle("Choose template to edit");
+        fileChooser.setDialogType(JFileChooser.FILES_ONLY);
+        if(fileChooser.showDialog(null, "Select") == JFileChooser.APPROVE_OPTION){
+            File file = fileChooser.getSelectedFile();
+            try {
+                List<Template> templates = new LinkedList<>();
+                String text = WordUtils.readTemplate(file, templates);
+                FillerView.setText(text);
+                FillerView.setTemplates(templates);
+                Context.getRenderPanel().show(FillerView.class);
+            } catch (TemplateException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public static void toBuilderEdit(){
@@ -75,11 +95,9 @@ public class MenuView extends JPanel {
     }
 
     private void initListeners(){
+        filler.addActionListener(e -> toFiller());
+        builder.addActionListener(e -> toBuilder());
         exit.addActionListener(e -> Context.exit());
-
-        builder.addActionListener(e -> {
-            toBuilder();
-        });
     }
 
 }

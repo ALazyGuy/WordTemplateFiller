@@ -68,13 +68,28 @@ public class TemplateBuildPanel extends JPanel {
             if(!tplName.getText().trim().isEmpty() &&
                     !tplDescription.getText().trim().isEmpty() &&
                     !tplSize.getText().trim().isEmpty()) {
+                int sizes = BuilderView.getTemplates()
+                        .stream()
+                        .filter(t -> t.getEnd() < start)
+                        .mapToInt(t -> t.toString().length())
+                        .sum();
+                int actualSizes = BuilderView.getTemplates()
+                        .stream()
+                        .filter(t -> t.getEnd() < start)
+                        .mapToInt(Template::getSize)
+                        .sum();
                 Template template = new Template(
                         tplName.getText().trim(),
                         tplDescription.getText().trim(),
                         start,
                         end,
                         Math.max(end - start, Integer.parseInt(tplSize.getText().trim())),
-                        end - start);
+                        end - start,
+                        start - sizes + actualSizes,
+                        end - sizes + actualSizes);
+
+                System.out.println(start + " " + end + " " + (start - sizes + actualSizes) + " " + (end - sizes + actualSizes));
+
                 BuilderView.appendTemplate(template);
                 Context.getModal().dispose();
             }

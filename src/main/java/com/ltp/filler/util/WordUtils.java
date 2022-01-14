@@ -3,6 +3,7 @@ package com.ltp.filler.util;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ltp.filler.context.model.Template;
+import com.ltp.filler.exception.TemplateException;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.SneakyThrows;
@@ -13,8 +14,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class WordUtils {
@@ -51,6 +56,33 @@ public class WordUtils {
                             e.printStackTrace();
                         }
                     });
+        }
+    }
+
+    public static String readTemplate(File template, List<Template> templates) throws TemplateException {
+        try {
+            List<String> lines = Files.lines(template.toPath()).collect(Collectors.toList());
+            String wordFilePath = lines.get(0);
+            if(Files.notExists(Paths.get(wordFilePath))){
+                throw new TemplateException(String.format("No word file found `%s`!", wordFilePath));
+            }
+            File wordFile = new File(wordFilePath);
+
+            String text = getText(wordFile);
+
+            ObjectMapper mapper = new ObjectMapper();
+
+            for(String line : lines){
+                if(!line.startsWith("{")){
+                    continue;
+                }
+
+                templates.add(mapper.readValue(line, Template.class));
+            }
+
+            return text;
+        } catch (IOException e) {
+            throw new TemplateException(String.format("No template file found `%s`!", template.getPath()));
         }
     }
 }

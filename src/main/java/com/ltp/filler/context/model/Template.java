@@ -16,6 +16,8 @@ public class Template {
     private int end;
     private int size;
     private int replaceSize;
+    private int actualStart;
+    private int actualEnd;
 
     public boolean touches(int start, int end){
         return end > (this.start) && start < (this.start + 6 + name.length() + description.length() + Integer.toString(size).length());

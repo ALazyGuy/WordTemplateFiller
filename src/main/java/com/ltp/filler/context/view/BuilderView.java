@@ -6,6 +6,7 @@ import com.ltp.filler.context.model.Template;
 import com.ltp.filler.context.model.TemplateAction;
 import com.ltp.filler.context.view.dialog.TemplateBuildPanel;
 import com.ltp.filler.util.WordUtils;
+import lombok.Getter;
 import lombok.Setter;
 
 import javax.swing.*;
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
 public class BuilderView extends JScrollPane {
 
     private static final JTextArea text = new JTextArea();
+    @Getter
     private static List<Template> templates = new LinkedList<>();
     private static Stack<Template> templatesToRecreate = new Stack<>();
     private static List<TemplateAction> saves = new LinkedList<>();

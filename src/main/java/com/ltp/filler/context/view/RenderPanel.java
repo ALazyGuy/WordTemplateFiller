@@ -13,6 +13,7 @@ public class RenderPanel extends JPanel {
 
         add(MenuView.class.getName(), new MenuView());
         add(BuilderView.class.getName(), new BuilderView());
+        add(FillerView.class.getName(), new FillerView());
     }
 
     public void show(Class clazz){
