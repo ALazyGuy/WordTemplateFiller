@@ -11,3 +11,9 @@ settings.restart: Changes will be applied after restart. Do you wanna restart no
 menuBar.file: File
 menuBar.file.settings: Settings
 menuBar.file.exit: Exit
+builder.tplTitle: Template builder
+builder.tplNameLabel: Template name
+builder.tplDescriptionLabel: Template description
+builder.tplSizeLabel: Template size, current size
+builder.apply: Apply
+builder.cancel: Cancel

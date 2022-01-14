@@ -11,3 +11,9 @@ settings.restart: Изменения вступят в силу после пе�
 menuBar.file: Файл
 menuBar.file.settings: Настройки
 menuBar.file.exit: Выход
+builder.tplTitle: Создание шаблона
+builder.tplNameLabel: Имя шаблона
+builder.tplDescriptionLabel: Описание шаблона
+builder.tplSizeLabel: Размер шаблона, текущий размер
+builder.apply: Создать
+builder.cancel: Отмена
