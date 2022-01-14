@@ -1,19 +1,30 @@
 package com.ltp.filler.context.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Setter
 @Getter
-@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 public class Template {
-    private final String name;
-    private final String description;
-    private final int start;
-    private final int end;
-    private final int size;
+    private String name;
+    private String description;
+    private int start;
+    private int end;
+    private int size;
+    private int replaceSize;
 
     public boolean touches(int start, int end){
         return end > (this.start) && start < (this.start + 6 + name.length() + description.length() + Integer.toString(size).length());
+    }
+
+    public void increaseSize(Template template){
+        int increaseValue = Math.abs(template.getSize() - template.toString().length());
+        start += increaseValue;
+        end += increaseValue;
     }
 
     @Override

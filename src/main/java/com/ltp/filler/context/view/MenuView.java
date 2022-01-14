@@ -50,6 +50,7 @@ public class MenuView extends JPanel {
             if(fileChooser.showDialog(this, "Select") == JFileChooser.APPROVE_OPTION){
                 File file = fileChooser.getSelectedFile();
                 BuilderView.setText(WordUtils.getText(file));
+                BuilderView.setFilePath(file.getPath());
             }
             Context.getRenderPanel().show(BuilderView.class);
         });

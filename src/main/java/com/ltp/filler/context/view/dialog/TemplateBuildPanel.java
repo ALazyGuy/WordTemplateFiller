@@ -43,6 +43,7 @@ public class TemplateBuildPanel extends JPanel {
 
         tplSizeLabel.setText(String.format("%s: %d", LangController.get("builder.tplSizeLabel"), end - start));
         tplSizeLabel.setBounds(30, 210, WIDTH - 60, 30);
+        tplSize.setText(Integer.toString(end - start));
         tplSize.setBounds(30, 240, WIDTH - 60, 30);
 
         cancel.setBounds(30, HEIGHT - 45, 100, 30);
@@ -64,14 +65,19 @@ public class TemplateBuildPanel extends JPanel {
     private void registerListeners(){
         cancel.addActionListener(e -> Context.getModal().dispose());
         apply.addActionListener(e -> {
-            Template template = new Template(
-                    tplName.getText(),
-                    tplDescription.getText(),
-                    start,
-                    end,
-                    Math.max(end - start, Integer.parseInt(tplSize.getText())));
-            BuilderView.appendTemplate(template);
-            Context.getModal().dispose();
+            if(!tplName.getText().trim().isEmpty() &&
+                    !tplDescription.getText().trim().isEmpty() &&
+                    !tplSize.getText().trim().isEmpty()) {
+                Template template = new Template(
+                        tplName.getText().trim(),
+                        tplDescription.getText().trim(),
+                        start,
+                        end,
+                        Math.max(end - start, Integer.parseInt(tplSize.getText().trim())),
+                        end - start);
+                BuilderView.appendTemplate(template);
+                Context.getModal().dispose();
+            }
         });
     }
 

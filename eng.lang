@@ -17,3 +17,6 @@ builder.tplDescriptionLabel: Template description
 builder.tplSizeLabel: Template size, current size
 builder.apply: Apply
 builder.cancel: Cancel
+builder.built: Build information
+builder.success: Built successfully!
+builder.fail: No templates specified!

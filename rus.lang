@@ -17,3 +17,6 @@ builder.tplDescriptionLabel: Описание шаблона
 builder.tplSizeLabel: Размер шаблона, текущий размер
 builder.apply: Создать
 builder.cancel: Отмена
+builder.built: Информация о сборке
+builder.success: Шаблон собран успешно!
+builder.fail: Не создано ни одного шаблона!
