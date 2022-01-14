@@ -2,3 +2,12 @@ menu.exit: Exit
 menu.builder: Builder
 menu.filler: Filler
 menu.welcome: MS Word Template Engine
+settings.lang.rus: Russian
+settings.lang.eng: English
+settings.langLabel: Language
+settings.accept: Accept
+settings.cancel: Cancel
+settings.restart: Changes will be applied after restart. Do you wanna restart now?
+menuBar.file: File
+menuBar.file.settings: Settings
+menuBar.file.exit: Exit

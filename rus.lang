@@ -2,3 +2,12 @@ menu.exit: Выход
 menu.builder: Построитель
 menu.filler: Заполнитель
 menu.welcome: Обработчик шаблонов MS Word
+settings.lang.rus: Русский
+settings.lang.eng: Английский
+settings.langLabel: Язык
+settings.accept: Принять
+settings.cancel: Отмена
+settings.restart: Изменения вступят в силу после перезагрузки. Хотите перезагрузить сейчас?
+menuBar.file: Файл
+menuBar.file.settings: Настройки
+menuBar.file.exit: Выход

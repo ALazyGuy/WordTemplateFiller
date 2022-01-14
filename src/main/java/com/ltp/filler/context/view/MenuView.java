@@ -2,6 +2,7 @@ package com.ltp.filler.context.view;
 
 import com.ltp.filler.context.Context;
 import com.ltp.filler.context.controller.LangController;
+import com.ltp.filler.context.view.dialog.SettingsPanel;
 import com.ltp.filler.util.WordUtils;
 
 import javax.swing.*;
@@ -51,12 +52,6 @@ public class MenuView extends JPanel {
                 BuilderView.setText(WordUtils.getText(file));
             }
             Context.getRenderPanel().show(BuilderView.class);
-        });
-
-        filler.addActionListener(e -> {
-            JDialog test = Context.newDialog("Test", new JPanel(), true);
-            test.setSize(100, 100);
-            test.setVisible(true);
         });
     }
 
