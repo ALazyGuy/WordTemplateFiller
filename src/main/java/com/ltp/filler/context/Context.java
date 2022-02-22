@@ -5,6 +5,8 @@ import com.ltp.filler.context.controller.LangController;
 import com.ltp.filler.context.view.MenuView;
 import com.ltp.filler.context.view.RenderPanel;
 import com.ltp.filler.context.view.dialog.SettingsPanel;
+import com.ltp.filler.security.SecurityContext;
+
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.SneakyThrows;
@@ -32,11 +34,15 @@ public class Context {
     private static JFrame window;
     private static RenderPanel renderPanel;
     private static JDialog modalDialog;
+    private static SecurityContext securityContext;
 
     public static void init(String CFG){
         CONFIG = CFG;
         loadProperties();
         LangController.init();
+
+        securityContext = new SecurityContext();
+        while(!securityContext.login());
         initWindow();
     }
 
@@ -65,6 +71,10 @@ public class Context {
 
     public static void setProperty(String name, String value){
         properties.put(name, value);
+    }
+
+    public static SecurityContext getSecurityContext(){
+        return securityContext;
     }
 
     @SneakyThrows

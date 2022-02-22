@@ -22,3 +22,4 @@ builder.cancel: Отмена
 builder.built: Информация о сборке
 builder.success: Шаблон собран успешно!
 builder.fail: Не создано ни одного шаблона!
+security.access.error: У вас недостаточно прав для выполнения этой операции

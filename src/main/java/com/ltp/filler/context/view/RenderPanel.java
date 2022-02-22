@@ -3,6 +3,9 @@ package com.ltp.filler.context.view;
 import javax.swing.*;
 import java.awt.*;
 
+import com.ltp.filler.context.Context;
+import com.ltp.filler.context.controller.LangController;
+
 public class RenderPanel extends JPanel {
 
     private final CardLayout layout;
@@ -17,7 +20,14 @@ public class RenderPanel extends JPanel {
     }
 
     public void show(Class clazz){
-        layout.show(this, clazz.getName());
+        if(Context.getSecurityContext().hasAccess(clazz)) {
+            layout.show(this, clazz.getName());
+        }else{
+            JOptionPane.showMessageDialog(null,
+                    LangController.get("security.access.error"),
+                    "Access error",
+                    JOptionPane.ERROR_MESSAGE);
+        }
     }
 
 }

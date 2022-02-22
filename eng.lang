@@ -22,3 +22,4 @@ builder.cancel: Cancel
 builder.built: Build information
 builder.success: Built successfully!
 builder.fail: No templates specified!
+security.access.error: You don't have permissions to do this operation
