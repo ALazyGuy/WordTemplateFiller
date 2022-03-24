@@ -42,6 +42,7 @@ public class MenuView extends JPanel {
                 List<Template> templates = new LinkedList<>();
                 String text = WordUtils.readTemplate(file, templates);
                 FillerView.setText(text);
+                FillerView.setTemplateDocument(file);
                 FillerView.setTemplates(templates);
                 Context.getRenderPanel().show(FillerView.class);
             } catch (TemplateException e) {

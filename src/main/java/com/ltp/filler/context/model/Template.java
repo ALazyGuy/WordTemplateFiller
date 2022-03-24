@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Template {
+public class Template implements Comparable<Template> {
     private String name;
     private String description;
     private int start;
@@ -35,4 +35,8 @@ public class Template {
         return String.format("{{%s,%s,%d%s}}", name, description, size, size > currSize ? "_".repeat(size - currSize) : "");
     }
 
+    @Override
+    public int compareTo(Template o) {
+        return o.getActualStart() - actualStart;
+    }
 }
